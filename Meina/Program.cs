@@ -12,7 +12,9 @@ namespace Meina
         {
             try
             {
-                client = new TerrariaClient("localhost", new PlayerInformation("Meina", 11, new Color(255, 248, 220), new Color(245, 245, 220), new Color(0, 0, 255),
+                client = new TerrariaClient(LogLevel.Debug);
+                client.ServerJoined += Ai;
+                client.Connect("localhost", new PlayerInformation("Meina", 11, new Color(255, 248, 220), new Color(245, 245, 220), new Color(0, 0, 255),
                     new Color(255, 0, 0), new Color(127, 0, 0), new Color(255, 248, 220), new Color(0, 0, 0), PlayerDifficulty.Easy), File.Exists("password.txt") ? File.ReadAllText("password.txt") : "");
             }
             catch (SocketException se)
@@ -22,7 +24,6 @@ namespace Meina
                 Console.ReadKey();
                 return;
             }
-            client.ServerJoined += Ai;
             Console.WriteLine("Bot is connected");
             while (true)
             { }
