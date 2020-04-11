@@ -8,11 +8,11 @@ namespace Meina
     class Program
     {
         private static TerrariaClient client;
-        static void Main(string[] args)
+        static void Main(string[] _)
         {
             try
             {
-                client = new TerrariaClient("localhost", new PlayerInformation("Meina", 11, new Color(255, 248, 220), new Color(255, 255, 153), new Color(0, 0, 255),
+                client = new TerrariaClient("localhost", new PlayerInformation("Meina", 11, new Color(255, 248, 220), new Color(245, 245, 220), new Color(0, 0, 255),
                     new Color(255, 0, 0), new Color(127, 0, 0), new Color(255, 248, 220), new Color(0, 0, 0), PlayerDifficulty.Easy), File.Exists("password.txt") ? File.ReadAllText("password.txt") : "");
             }
             catch (SocketException se)
@@ -31,6 +31,7 @@ namespace Meina
         private static void Ai()
         {
             client.JoinTeam(Team.Red);
+            client.TogglePVP(true);
         }
     }
 }
