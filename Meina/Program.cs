@@ -24,7 +24,6 @@ namespace Meina
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("Bot is connected");
             while (true)
             { }
         }
