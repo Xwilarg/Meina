@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Threading;
 using TerrariaBot;
 using TerrariaBot.Entity;
 
@@ -9,6 +10,7 @@ namespace Meina
     class Program
     {
         private static TerrariaClient client;
+        private static AutoResetEvent autoEvent = new AutoResetEvent(false);
         static void Main(string[] _)
         {
             try
@@ -25,8 +27,7 @@ namespace Meina
                 Console.ReadKey();
                 return;
             }
-            while (true)
-            { }
+            autoEvent.WaitOne();
         }
 
         private static void Ai(PlayerSelf me)
