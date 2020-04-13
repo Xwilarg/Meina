@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Sockets;
 using TerrariaBot;
+using TerrariaBot.Entity;
 
 namespace Meina
 {
@@ -28,10 +29,10 @@ namespace Meina
             { }
         }
 
-        private static void Ai()
+        private static void Ai(PlayerSelf me)
         {
-            client.JoinTeam(Team.Red);
-            client.TogglePVP(true);
+            me.JoinTeam(Team.Red);
+            me.TogglePVP(true);
         }
     }
 }
