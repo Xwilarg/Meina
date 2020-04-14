@@ -6,8 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Facepunch.Steamworks" Version="2.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="TerrariaBot">
       <HintPath>..\..\TerrariaBot\TerrariaBot\bin\Debug\netcoreapp3.1\TerrariaBot.dll</HintPath>
+    </Reference>
+    <Reference Include="TerrariaBot.Steam">
+      <HintPath>..\..\TerrariaBot\TerrariaBot.Steam\bin\Debug\netcoreapp3.1\TerrariaBot.Steam.dll</HintPath>
     </Reference>
   </ItemGroup>
 
