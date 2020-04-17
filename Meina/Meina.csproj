@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Steamworks.NET">
+      <HintPath>..\Steamworks.NET.dll</HintPath>
+    </Reference>
     <Reference Include="TerrariaBot">
       <HintPath>..\..\TerrariaBot\TerrariaBot\bin\Debug\netcoreapp3.1\TerrariaBot.dll</HintPath>
     </Reference>

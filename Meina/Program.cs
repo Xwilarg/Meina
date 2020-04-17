@@ -19,7 +19,7 @@ namespace Meina
             {
                 client = new IPClient(LogLevel.Debug);
                 client.ServerJoined += Ai;
-                client.ConnectWithIP("localhost", new PlayerInformation("Meina", 11, new Color(255, 248, 220), new Color(245, 245, 220), new Color(0, 0, 255),
+                client.ConnectWithIP(File.ReadAllText("ip.txt"), new PlayerInformation("Meina", 11, new Color(255, 248, 220), new Color(245, 245, 220), new Color(0, 0, 255),
                     new Color(255, 0, 0), new Color(127, 0, 0), new Color(255, 248, 220), new Color(0, 0, 0), PlayerDifficulty.Easy), File.Exists("password.txt") ? File.ReadAllText("password.txt") : "");
             }
             catch (SocketException se)
@@ -34,6 +34,7 @@ namespace Meina
 
         private static void Ai(PlayerSelf me)
         {
+            me.SendChatMessage("I'm connected!");
             me.JoinTeam(Team.Red);
             me.TogglePVP(true);
         }
