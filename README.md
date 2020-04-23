@@ -15,3 +15,6 @@ Meina [command] [argument(s)]
 ```
 The available commands are the following:
  - Go to [player name]: Teleport to the location of another player
+ - Come here: Teleport to the player's location
+ - Go [left/right]: Start running left or right
+ - Stop: Stop doing the current action she is doing

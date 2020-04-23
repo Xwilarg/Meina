@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
@@ -31,24 +30,30 @@ namespace Meina
                 do
                 {
                     choice = Console.ReadKey().KeyChar;
-                } while (choice == '1' || choice == '2');
+                } while (choice != '1' && choice != '2');
                 string ip;
                 if (choice == '1')
                 {
                     client = new IPClient();
-                    Console.WriteLine("Enter IP address:");
+                    Console.Clear();
+                    Console.WriteLine("Enter IP address (localhost):");
                     ip = Console.ReadLine();
+                    if (ip == "") ip = "localhost";
                 }
                 else
                 {
+                    client = new SteamClient();
+                    Console.Clear();
                     Console.WriteLine("Enter Steam ID to join:");
                     ip = Console.ReadLine();
                 }
                 client.ServerJoined += Ai;
                 client.Log += Log;
                 client.ChatMessageReceived += Chat;
+                Console.Clear();
                 Console.WriteLine("Enter password if any:");
                 string password = Console.ReadLine();
+                Console.Clear();
                 if (choice == '1')
                 {
                     ((IPClient)client).ConnectWithIP(ip, myInfos, password);
@@ -81,13 +86,39 @@ namespace Meina
                 if (message.StartsWith("go to"))
                 {
                     message = message.Substring(5).Trim();
-                    var player = client.GetAllPlayers().Where(x => x.GetName().ToLower() == message).FirstOrDefault();
+                    Player player;
+                    if (message == "me") player = author; 
+                    else player = client.GetAllPlayers().Where(x => x.GetName().ToLower() == message).FirstOrDefault();
                     if (player == null) me.SendChatMessage("There is nobody with that name here");
                     else
                     {
                         SendSuccessMessage(me);
                         me.Teleport(player.GetPosition());
                     }
+                }
+                else if (message.StartsWith("come here"))
+                {
+                    SendSuccessMessage(me);
+                    me.Teleport(author.GetPosition());
+                }
+                else if (message.StartsWith("go"))
+                {
+                    message = message.Substring(2).Trim();
+                    if (message == "left")
+                    {
+                        SendSuccessMessage(me);
+                        me.DoAction(PlayerAction.Left);
+                    }
+                    else if (message == "right")
+                    {
+                        SendSuccessMessage(me);
+                        me.DoAction(PlayerAction.Right);
+                    }
+                }
+                else if (message.StartsWith("stop"))
+                {
+                    SendSuccessMessage(me);
+                    me.DoAction();
                 }
             }
         }
